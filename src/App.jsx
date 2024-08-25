@@ -1,34 +1,44 @@
 import { useState, useEffect } from 'react';
 import Welcome from './components/pages/1- Welcome/Welcome';
 import Collaboration from './components/pages/2- Collaboration/Collaboration';
-import BlackScreenTransition from './components/Transition/BlackScreenTransition';
+import PlayerForm from './components/pages/3- PlayerForm/PlayerForm';
 
 const App = () => {
-  const [currentScreen, setCurrentScreen] = useState('welcome'); // Estado para manejar la pantalla actual
-  const [transitionStage, setTransitionStage] = useState('none'); // Estado para manejar la transición
+  const [currentScreen, setCurrentScreen] = useState(0);
 
   useEffect(() => {
-    if (currentScreen === 'welcome') {
+    if (currentScreen < 2) { // Solo ejecuta el temporizador en las primeras dos pantallas
       const timer = setTimeout(() => {
-        setTransitionStage('black'); // Activar pantalla negra
+        setCurrentScreen((prevScreen) => prevScreen + 1);
+      }, 3000); // Cambia de pantalla cada 3 segundos
 
-        setTimeout(() => {
-          setTransitionStage('none');
-          setCurrentScreen('collaboration'); // Cambiar a la pantalla de colaboración
-        }, 1000); // Duración de la pantalla negra
-      }, 2000); // Duración de la pantalla de bienvenida
-
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timer); // Limpia el temporizador al desmontar el componente
     }
   }, [currentScreen]);
 
+  const handleNextScreen = () => {
+    setCurrentScreen((prevScreen) => prevScreen + 1);
+  };
+
+  const renderScreen = () => {
+    switch (currentScreen) {
+      case 0:
+        return <Welcome />;
+      case 1:
+        return <Collaboration />;
+      case 2:
+        return <PlayerForm onNextScreen={handleNextScreen} />;
+      default:
+        return <div>Final</div>; // Puedes cambiar esto para manejar lo que pasa después de la última pantalla
+    }
+  };
+
   return (
-    <div>
-      {currentScreen === 'welcome' && <Welcome />}
-      {transitionStage === 'black' && <BlackScreenTransition />}
-      {currentScreen === 'collaboration' && <Collaboration />}
+    <div className="App">
+      {renderScreen()}
     </div>
   );
 };
 
 export default App;
+
