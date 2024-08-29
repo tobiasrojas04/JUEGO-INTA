@@ -82,11 +82,11 @@ label {
 
 button {
     /* Variables */
+    font-family: 'Fredoka One', sans-serif;
     --button_radius: 0.75em;
     --button_color: #D4E157;
     --button_outline_color: #388E3C;
     font-size: 17px;
-    font-weight: bold;
     border: none;
     border-radius: var(--button_radius);
     background: var(--button_outline_color);
@@ -103,6 +103,11 @@ button {
     color: var(--button_outline_color);
     transform: translateY(-0.2em);
     transition: transform 0.1s ease;
+}
+
+#member {
+    font-size: 12px;
+    padding: 0.8em 1.4em;
 }
 
 button:hover .button_top {

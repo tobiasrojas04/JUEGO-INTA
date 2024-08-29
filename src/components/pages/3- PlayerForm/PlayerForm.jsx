@@ -36,7 +36,7 @@ const PlayerForm = ({ onNextScreen }) => {
                     </label>
                 </div>
                 <div className="form_input">
-                    <label>¿Quienes van a ser parte del equipo?
+                    <label>¿Quienes van a ser parte del equipo? (5 por equipo)
                         <input 
                             list="miembros" 
                             value={name}
@@ -46,7 +46,9 @@ const PlayerForm = ({ onNextScreen }) => {
                         <datalist id="miembros" name="miembros">
                         </datalist>
                     </label>
-                    <button onClick={handleAddMember}>Agregar Miembro</button>
+                    <button onClick={handleAddMember}>
+                        <span id= "member" className="button_top">AGREGAR MIEMBRO</span>
+                        </button>
                     <ul>
                         {teamMembers.map((member, index) => (
                             <li key={index}>{member}</li>

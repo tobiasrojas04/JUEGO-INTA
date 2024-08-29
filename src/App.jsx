@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Welcome from './components/pages/1- Welcome/Welcome';
 import Collaboration from './components/pages/2- Collaboration/Collaboration';
 import PlayerForm from './components/pages/3- PlayerForm/PlayerForm';
+import QuestionCategory from './components/pages/4- QuestionCategory/QuestionCategory';
 
 const App = () => {
   const [currentScreen, setCurrentScreen] = useState(0);
@@ -28,6 +29,8 @@ const App = () => {
         return <Collaboration />;
       case 2:
         return <PlayerForm onNextScreen={handleNextScreen} />;
+      case 3:
+        return <QuestionCategory />
       default:
         return <div>Final</div>; // Puedes cambiar esto para manejar lo que pasa después de la última pantalla
     }
