@@ -1,9 +1,5 @@
-body {
-    padding: 0;
-    background-color: var(--background, #f0f0f0);
-}
-
 .container {
+    justify-content: center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,8 +44,6 @@ body {
     height: auto;
     border-radius: 50%;
 }
-
-
 
 /* Responsive styles */
 @media (max-width: 600px) {

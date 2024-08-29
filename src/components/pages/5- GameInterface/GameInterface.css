@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+/* Estilos generales */
+body {
+    font-family: 'Fredoka One', sans-serif;
+}
+
+.interface-container {
+    width: 98vw;
+    height: 1vh;
+
+}
+/* Estilos del encabezado */
+.header {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    padding: 1px;
+    display: flex;
+    background-color: transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    margin: auto;
+    padding: 2px;
+    font-size: 1.5rem;
+}
+
+/* Contenedor de imagen */
+.image-container {
+    margin: auto;
+    border: 2px solid blue;
+    width: 55%;
+    height: 80%;
+    padding: 12%;
+    margin-top: 10px;
+}
+
+/* Contenedor de interfaz inferior */
+.game-container {
+    box-sizing: border-box;
+    margin: auto;
+    width: 100%;
+    height: 35vh;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+/* Contenedor de pregunta + barra  #10c10b*/
+.question-container {
+    border: 2px solid black;
+    background: linear-gradient(to right, #FDFC47, #168e04 );
+    padding: 11px;
+    width: 98%;
+    height: 30%;
+    text-align: center;
+    margin: auto;
+    box-shadow: 0 2px 5px black;
+    margin-bottom: 1%;
+    border-radius: 8px;
+}
+
+.question-number {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.question-text {
+    font-size: 1.27rem;
+}
+
+.downloading-bar {
+        width: 120px;
+        height: 22px;
+        border-radius: 20px;
+        color: black;
+        border: 2px solid;
+        position: relative;
+        margin: auto;
+        margin-top: 0.7%;
+}  
+
+.downloading-bar::before {
+        content: "";
+        position: absolute;
+        margin: 2px;
+        inset: 0 100% 0 0;
+        border-radius: inherit;
+        background: black;
+        animation: p6 15s infinite;
+}
+
+@keyframes p6 {
+    100% {
+    inset: 0
+    }
+}
+
+/* Contenedor de las respuestas */
+.answers-container {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 99%;
+    height: 60%;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.answer-btn {
+    font-family: 'Fredoka One';
+    border: none;
+    box-sizing: border-box; 
+    box-shadow: 0 5px 5px black;
+    padding: 2.7%;
+    font-size: 1.25rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.answer-btn:hover {
+    border: 3px solid #41ff00;
+    box-sizing: border-box;
+    
+}
+
+.o1 {
+    background-color: red;
+}
+
+.o2 {
+    background-color: blue;
+}
+
+.o3 {
+    background-color: yellow;
+}
+
+.o4 {
+    background-color: #de00ff;
+}
+
+/* Media Queries para diseño responsivo */
+@media (min-width: 600px) {
+    .answers-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+    }
+
+    .question-text {
+        font-size: 1.5rem;
+    }
+
+    .answer-btn {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .header h1 {
+        font-size: 3rem;
+    }
+
+    .question-number {
+        font-size: 3rem;
+    }
+
+    .question-text {
+        font-size: 1.75rem;
+    }
+
+    .answer-btn {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .header h1 {
+        font-size: 3.5rem;
+    }
+
+    .question-number {
+        font-size: 3.5rem;
+    }
+
+    .question-text {
+        font-size: 2rem;
+    }
+
+    .answer-btn {
+        font-size: 2rem;
+    }
+}
