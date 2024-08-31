@@ -13,7 +13,7 @@ const QuestionCategory = () => {
       <h1 className="main-title">¿Qué categoría vas a elegir?</h1>
       <h2 className="subtitle">El suelo relacionado con:</h2>
       <div className="buttons">
-        <button 
+        <button
           className="c-button c-button--gooey cultivos" 
           onClick={() => handleCategoryClick('cultivos')}
         >

@@ -1,19 +1,28 @@
-import { useEffect, useState } from 'react';
-import './BlackScreenTransition.css';
-
-const BlackScreenTransition = () => {
-    const [visible, setVisible] = useState(true);
-  
+import{ useEffect} from 'react';
+import './BlackScreen.css'; // Asegúrate de que este archivo contiene las clases CSS definidas
+import PropTypes from 'prop-types'
+const BlackScreen = ({ isVisible, onTransitionEnd }) => {
     useEffect(() => {
-      const timer = setTimeout(() => {
-        setVisible(false);
-      }, 1000); // Duración de la pantalla negra (1 segundo)
-  
-      return () => clearTimeout(timer);
-    }, []);
-  
-    return <div className={`black-screen ${visible ? 'fade-in' : 'fade-out'}`}></div>;
-  };
-  
-  export default BlackScreenTransition;
+        if (isVisible) {
+            const timer = setTimeout(() => {
+                onTransitionEnd(); // Llama a la función pasada por props después de la transición
+            }, 1000); // Duración de la transición
+
+            return () => clearTimeout(timer);
+        }
+    }, [isVisible, onTransitionEnd]);
+
+    return (
+        <div className={`black-screen ${isVisible ? 'visible' : ''}`}></div>
+    );
+};
+
+BlackScreen.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  onTransitionEnd: PropTypes.func.isRequired,
+};
+
+export default BlackScreen;
+
+
 

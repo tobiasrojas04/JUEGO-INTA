@@ -30,6 +30,21 @@ const PlayerForm = ({ onNextScreen }) => {
                 <fieldset className="fieldset_form1">
                     <legend className="fieldset_legends">INFORMACIÓN BASICA</legend>
                     <div className="form_input">
+                        <label>Nombre
+                        <input type="text" name="" id="" placeholder="Ingrese su nombre..."/>
+                        </label>
+                    </div>
+                    <div className="form_input">
+                        <label>Apellido
+                        <input type="text" name="" id="" placeholder="Ingrese su apellido..."/>
+                        </label>
+                    </div>
+                    <div className="form_input">
+                        <label>Nombre de Usuario
+                        <input type="text" name="" id="" placeholder="Recuerde usar los mismos datos con los que se registro!"/>
+                        </label>
+                    </div>
+                    <div className="form_input">
                         <label>¿De que escuela venis?
                             <input list="referente" />
                             <datalist id="referente" name="referente">
@@ -61,13 +76,7 @@ const PlayerForm = ({ onNextScreen }) => {
                             <input name="nombre" id="nombre" placeholder="Ej: Los Guardianes Rojos" type="text" />
                         </label>
                     </div>
-                </fieldset>
-                        
-                <div className="form_input">
-                    <label htmlFor="mensaje">¿Les esta gustando la visita?</label>
-                    <textarea id="mensaje" rows="8" placeholder="Escribi algo lindo"></textarea>
-                </div>
-                        
+                </fieldset>   
                 <button type="submit">
                     <span className="button_top">¡A JUGAR!</span>
                 </button>
