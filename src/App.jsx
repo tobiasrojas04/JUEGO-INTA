@@ -16,7 +16,7 @@ const App = () => {
       if (currentScreen < 2) { // Solo ejecuta el temporizador en las primeras tres pantallas
           const timer = setTimeout(() => {
               handleNextScreen();
-          }, 3000); // Cambia de pantalla cada 3 segundos
+          }, 3500); // Cambia de pantalla cada 3 segundos
 
           return () => clearTimeout(timer);
       }

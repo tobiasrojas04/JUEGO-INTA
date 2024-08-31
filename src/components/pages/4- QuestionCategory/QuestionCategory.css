@@ -102,9 +102,9 @@ body {
 /* Colores para cada boton */
 .cultivos { background-color: #86e014; }
 .labranzas { background-color: #ff6400; }
-.vacas { background-color: #fff811; }
-.microorganismos{ background-color: #00bcd4; }
-.origen { background-color: #2e7d32;}
+.vacas {background: linear-gradient(to right,white, black);}
+.microorganismos{ background-color: #00bcd4;}
+.origen { background-color:  #fff811;}
 
 
 
