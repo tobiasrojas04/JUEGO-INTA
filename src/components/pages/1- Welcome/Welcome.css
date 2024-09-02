@@ -18,6 +18,7 @@
     border: 3px solid #fcef1a ;
     border-radius: 2rem;
     padding: 1.5rem; /* Aumentado desde 1rem a 1.5rem */
+    box-shadow: 0 0 25px green;
 }
 
 .welcome-text {

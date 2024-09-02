@@ -14,7 +14,6 @@ const questionsData = {
       answers: ['Arenoso', 'Arcilloso', 'Limoso', 'Pedregoso'],
       correctAnswer: 2
     },
-    // Añade más preguntas aquí...
   ],
   labranzas: [
     {
@@ -27,9 +26,7 @@ const questionsData = {
       answers: ['Rastrillo', 'Pala', 'Arado', 'Carretilla'],
       correctAnswer: 2
     },
-    // Añade más preguntas aquí...
   ],
-  // Añade más categorías aquí...
 };
 
 const GameInterface = () => {
@@ -38,6 +35,7 @@ const GameInterface = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
   const [timeUp, setTimeUp] = useState(false);
+  const [overlayActive, setOverlayActive] = useState(false);
 
   const categoryQuestions = questionsData[category] || [];
   const currentQuestion = categoryQuestions[currentQuestionIndex] || {};
@@ -45,33 +43,40 @@ const GameInterface = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeUp(true);
-    }, 18000); // 18 segundos
+    }, 18000);
 
-    return () => clearTimeout(timer); // Limpiar el temporizador al desmontar el componente
+    return () => clearTimeout(timer);
   }, []);
 
   const handleAnswerClick = (index) => {
     setSelectedAnswer(index);
     const correct = index === currentQuestion.correctAnswer;
     setIsCorrect(correct);
+    setOverlayActive(true);
 
-    // Después de un pequeño delay, avanzar a la siguiente pregunta
     setTimeout(() => {
       setSelectedAnswer(null);
       setIsCorrect(null);
+      setOverlayActive(false);
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    }, 1000); // 1 segundo de delay para mostrar si la respuesta fue correcta o incorrecta
+    }, 2100);
   };
 
   return (
-    <div className='interface-container'>
+    <div className={`interface-container ${overlayActive ? 'overlay-active' : ''}`}>
       <header className="header">
         <h1>Guardianes del suelo</h1>
       </header>
       <div className="image-container"></div>
       <main className="game-container">
         <section className="question-container">
-          <div className="question-text">{currentQuestion.question}</div>
+          <div className="question-text">
+            {isCorrect === null
+              ? currentQuestion.question
+              : isCorrect
+              ? '¡Correcto!'
+              : '¡Incorrecta! Suerte la próxima'}
+          </div>
           <div className="downloading-bar"></div>
           {timeUp && <div className="time-up-message">¡Tiempo terminado!</div>}
         </section>
@@ -79,24 +84,26 @@ const GameInterface = () => {
           {currentQuestion.answers?.map((answer, index) => (
             <button
               key={index}
-              className={`answer-btn o${index + 1} ${selectedAnswer === index ? 'selected' : ''}`}
+              className={`answer-btn o${index + 1} ${
+                selectedAnswer === index && isCorrect !== null
+                  ? isCorrect
+                    ? 'correct-answer'
+                    : 'incorrect-answer'
+                  : ''
+              }`}
               onClick={() => handleAnswerClick(index)}
             >
               {answer}
             </button>
           ))}
         </section>
-        {isCorrect !== null && (
-          <div className={`result ${isCorrect ? 'correct' : 'incorrect'}`}>
-            {isCorrect ? '¡Correcto!' : 'Incorrecto'}
-          </div>
-        )}
       </main>
     </div>
   );
 };
 
 export default GameInterface;
+
 
 
 
