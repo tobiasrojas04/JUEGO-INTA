@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './GameInterface.css';
 
@@ -34,32 +34,52 @@ const GameInterface = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
-  const [timeUp, setTimeUp] = useState(false);
   const [overlayActive, setOverlayActive] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(18); // Estado para la cuenta regresiva
+  const [timeUp, setTimeUp] = useState(false); // Estado para indicar si el tiempo se acabó
 
   const categoryQuestions = questionsData[category] || [];
   const currentQuestion = categoryQuestions[currentQuestionIndex] || {};
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setTimeUp(true);
-    }, 18000);
+    if (timeLeft > 0 && !selectedAnswer) {
+      const timer = setTimeout(() => {
+        setTimeLeft((prevTime) => prevTime - 1);
+      }, 1000);
 
-    return () => clearTimeout(timer);
-  }, []);
+      return () => clearTimeout(timer);
+    } else if (timeLeft === 0) {
+      setTimeUp(true);
+
+      // Activar el efecto de opacidad cuando se termina el tiempo
+      setOverlayActive(true);
+
+      // Pasa a la siguiente pregunta después de 4 segundos cuando el tiempo se termina
+      setTimeout(() => {
+        setSelectedAnswer(null);
+        setIsCorrect(null);
+        setOverlayActive(false); // Desactiva el overlay después de cambiar de pregunta
+        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+        setTimeLeft(18); // Reinicia el tiempo para la siguiente pregunta
+        setTimeUp(false); // Resetea el estado de "tiempo terminado"
+      }, 4000);
+    }
+  }, [timeLeft, selectedAnswer]);
 
   const handleAnswerClick = (index) => {
     setSelectedAnswer(index);
     const correct = index === currentQuestion.correctAnswer;
     setIsCorrect(correct);
-    setOverlayActive(true);
+    setOverlayActive(true); // Activa el efecto de opacidad
 
     setTimeout(() => {
       setSelectedAnswer(null);
       setIsCorrect(null);
-      setOverlayActive(false);
+      setOverlayActive(false); // Desactiva el efecto de opacidad
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    }, 2100);
+      setTimeLeft(18); // Reinicia el tiempo para la siguiente pregunta
+      setTimeUp(false); // Resetea el estado de "tiempo terminado"
+    }, 3000);
   };
 
   return (
@@ -74,12 +94,16 @@ const GameInterface = () => {
             {isCorrect === null
               ? currentQuestion.question
               : isCorrect
-              ? '¡Correcto!'
-              : '¡Incorrecta! Suerte la próxima'}
+              ? '¡CORRECTO! ¡A seguir así!'
+              : 'INCORRECTA ¡Suerte la próxima!'}
           </div>
-          <div className="downloading-bar"></div>
-          {timeUp && <div className="time-up-message">¡Tiempo terminado!</div>}
+
+          {/* Mensaje de cuenta regresiva o tiempo terminado */}
+          <div className="timer-text">
+            {timeUp ? '¡TIEMPO TERMINADO! Pasemos a la siguiente' : `Tiempo terminado en: ${timeLeft}s`}
+          </div>
         </section>
+
         <section className="answers-container">
           {currentQuestion.answers?.map((answer, index) => (
             <button
@@ -92,6 +116,7 @@ const GameInterface = () => {
                   : ''
               }`}
               onClick={() => handleAnswerClick(index)}
+              disabled={timeUp} // Desactiva los botones si el tiempo se terminó
             >
               {answer}
             </button>

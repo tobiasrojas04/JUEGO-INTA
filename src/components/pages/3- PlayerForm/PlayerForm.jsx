@@ -6,6 +6,14 @@ const PlayerForm = ({ onNextScreen }) => {
     const [teamMembers, setTeamMembers] = useState([]);
     const [name, setName] = useState('');
     const [placeholder, setPlaceholder] = useState('Escribe un nombre aquí');
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        username: '',
+        school: '',
+        teamName: '',
+    });
+    const [errors, setErrors] = useState({});
 
     const handleAddMember = (e) => {
         e.preventDefault();
@@ -14,12 +22,38 @@ const PlayerForm = ({ onNextScreen }) => {
             setName('');
             setPlaceholder('¡Usuario cargado!');
             setTimeout(() => setPlaceholder('Escribe un nombre aquí'), 1000);
+        } else {
+            setPlaceholder('Debe agregar un nombre válido');
         }
     };
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (!formData.firstName.trim()) newErrors.firstName = '¡El nombre es obligatorio!';
+        if (!formData.lastName.trim()) newErrors.lastName = '¡El apellido es obligatorio!';
+        if (!formData.username.trim()) newErrors.username = '¡El nombre de usuario es obligatorio!';
+        if (!formData.school.trim()) newErrors.school = '¡Ingrese el nombre de su escuela!';
+        if (!formData.teamName.trim()) newErrors.teamName = '¡El nombre del equipo es obligatorio!';
+        if (teamMembers.length < 1) newErrors.teamMembers = 'Debe agregar al menos un miembro al equipo';
+        return newErrors;
+    };
+
     const handleSubmit = (e) => {
-        e.preventDefault(); // Previene la recarga de la página
-        onNextScreen(); // Cambia a la siguiente pantalla al hacer clic en "¡A JUGAR!"
+        e.preventDefault();
+        const validationErrors = validateForm();
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+        } else {
+            onNextScreen();
+        }
     };
 
     return (
@@ -31,40 +65,61 @@ const PlayerForm = ({ onNextScreen }) => {
                     <legend className="fieldset_legends">INFORMACIÓN BASICA</legend>
                     <div className="form_input">
                         <label>Nombre
-                        <input type="text" name="" id="" placeholder="Ingrese su nombre..."/>
+                        <input 
+                            type="text" 
+                            name="firstName" 
+                            placeholder={errors.firstName || "Ingrese su nombre..."} 
+                            value={formData.firstName} 
+                            onChange={handleChange}
+                        />
                         </label>
                     </div>
                     <div className="form_input">
                         <label>Apellido
-                        <input type="text" name="" id="" placeholder="Ingrese su apellido..."/>
+                        <input 
+                            type="text" 
+                            name="lastName" 
+                            placeholder={errors.lastName || "Ingrese su apellido..."} 
+                            value={formData.lastName} 
+                            onChange={handleChange}
+                        />
                         </label>
                     </div>
                     <div className="form_input">
                         <label>Nombre de Usuario
-                        <input type="text" name="" id="" placeholder="Recuerde usar los mismos datos con los que se registro!"/>
+                        <input 
+                            type="text" 
+                            name="username" 
+                            placeholder={errors.username || "Recuerde usar los mismos datos con los que se registró!"} 
+                            value={formData.username} 
+                            onChange={handleChange}
+                        />
                         </label>
                     </div>
                     <div className="form_input">
-                        <label>¿De que escuela venis?
-                            <input list="referente" />
-                            <datalist id="referente" name="referente">
-                            </datalist>
+                        <label>¿De qué escuela vienes?
+                        <input 
+                            type="text" 
+                            name="school" 
+                            placeholder={errors.school || "Escribe el nombre de tu escuela..."} 
+                            value={formData.school} 
+                            onChange={handleChange}
+                        />
                         </label>
                     </div>
                     <div className="form_input">
-                        <label>¿Quienes van a ser parte del equipo? (5 por equipo)
-                            <input 
-                                list="miembros" 
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder={placeholder}
-                            />
-                            <datalist id="miembros" name="miembros">
-                            </datalist>
+                        <label>¿Quiénes van a ser parte del equipo? (5 por equipo)
+                        <input 
+                            list="miembros" 
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder={placeholder}
+                        />
+                        <datalist id="miembros" name="miembros"></datalist>
                         </label>
                         <button onClick={handleAddMember}>
                             <span id= "member" className="button_top">AGREGAR MIEMBRO</span>
-                            </button>
+                        </button>
                         <ul>
                             {teamMembers.map((member, index) => (
                                 <li key={index}>{member}</li>
@@ -72,11 +127,17 @@ const PlayerForm = ({ onNextScreen }) => {
                         </ul>
                     </div>
                     <div className="form_input">
-                        <label>¿Como se va a llamar tu equipo?
-                            <input name="nombre" id="nombre" placeholder="Ej: Los Guardianes Rojos" type="text" />
+                        <label>¿Cómo se va a llamar tu equipo?
+                        <input 
+                            type="text" 
+                            name="teamName" 
+                            placeholder={errors.teamName || "Ej: Los Guardianes Rojos"} 
+                            value={formData.teamName} 
+                            onChange={handleChange}
+                        />
                         </label>
                     </div>
-                </fieldset>   
+                </fieldset>
                 <button type="submit">
                     <span className="button_top">¡A JUGAR!</span>
                 </button>
