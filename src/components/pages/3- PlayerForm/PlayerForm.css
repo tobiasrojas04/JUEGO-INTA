@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
 body {
     font-family: sans-serif;
 }
@@ -7,7 +8,7 @@ form {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
     background-color: #bd612d;
     justify-content: center;
     text-align: center;
@@ -55,15 +56,6 @@ option {
     background-color: #443f3f;
 }
 
-textarea {
-    resize: vertical;
-    font-family: sans-serif;
-}
-
-textarea::placeholder {
-    color: black;
-}
-
 label {
     font-size: 1rem;
     margin-bottom: 5px;
@@ -84,6 +76,19 @@ label {
     color: yellow;
 }
 
+/* Modo login */
+.login-mode input, .login-mode textarea, .login-mode select {
+    border: 1px solid #62dc09;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.fieldset_form1.login-mode {
+    border: 1px solid #62dc09;
+}
+
+.fieldset_legends.login-mode {
+    color: #62dc09;
+}
 
 button {
     /* Variables */
@@ -96,6 +101,17 @@ button {
     border-radius: var(--button_radius);
     background: var(--button_outline_color);
     margin-top: 2%;
+}
+
+#espacio {
+    margin-left: 8%;
+}
+
+.button_group {
+    display: flex;
+    gap: 20px; /* Aumentar el espacio entre los botones */
+    justify-content: center;
+    margin-top: 20px; /* Añadir espacio extra arriba de los botones */
 }
 
 .button_top {
@@ -116,12 +132,10 @@ button {
 }
 
 button:hover .button_top {
-    /* Pull the button upwards when hovered */
     transform: translateY(-0.33em);
 }
 
 button:active .button_top {
-    /* Push the button downwards when pressed */
     transform: translateY(0);
 }
 
@@ -131,3 +145,4 @@ button:active .button_top {
         padding: 20px 40px;
     }
 }
+
