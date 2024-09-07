@@ -10,6 +10,7 @@ const PlayerForm = ({ onNextScreen }) => {
         firstName: '',
         lastName: '',
         username: '',
+        password: '', // Nuevo campo de contraseña
         school: '',
         teamName: '',
     });
@@ -40,12 +41,13 @@ const PlayerForm = ({ onNextScreen }) => {
         const newErrors = {};
         
         // Validar campos que siempre son necesarios
-        if (!formData.firstName.trim()) newErrors.firstName = '¡El nombre es obligatorio!';
-        if (!formData.lastName.trim()) newErrors.lastName = '¡El apellido es obligatorio!';
         if (!formData.username.trim()) newErrors.username = '¡El nombre de usuario es obligatorio!';
+        if (!formData.password.trim()) newErrors.password = '¡La contraseña es obligatoria!'; // Validación de contraseña
     
         // Solo validar estos campos si NO estamos en modo de "Iniciar Sesión"
         if (!isLoginMode) {
+            if (!formData.firstName.trim()) newErrors.firstName = '¡El nombre es obligatorio!';
+            if (!formData.lastName.trim()) newErrors.lastName = '¡El apellido es obligatorio!';
             if (!formData.school.trim()) newErrors.school = '¡Ingrese el nombre de su escuela!';
             if (!formData.teamName.trim()) newErrors.teamName = '¡El nombre del equipo es obligatorio!';
             if (teamMembers.length < 1) newErrors.teamMembers = 'Debe agregar al menos un miembro al equipo';
@@ -53,7 +55,6 @@ const PlayerForm = ({ onNextScreen }) => {
     
         return newErrors;
     };
-    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -66,11 +67,9 @@ const PlayerForm = ({ onNextScreen }) => {
             onNextScreen();
         }
     };
-    
 
     const handleLogin = () => {
         setIsLoginMode(true);  // Cambiar a modo login
-        // Aquí puedes agregar la lógica para manejar el login
         console.log('Iniciar sesión');
     };
 
@@ -88,65 +87,77 @@ const PlayerForm = ({ onNextScreen }) => {
                     <legend className={`fieldset_legends ${isLoginMode ? 'login-mode' : ''}`}>
                         {isLoginMode ? 'INICIA SESIÓN' : '¿NUNCA JUGASTE? REGISTRATE'}
                     </legend>
-                    <div className="form_input">
-                        <label>Nombre
-                        <input 
-                            type="text" 
-                            name="firstName" 
-                            className={isLoginMode ? 'login-mode' : ''}
-                            placeholder={errors.firstName || "Ingrese su nombre..."} 
-                            value={formData.firstName} 
-                            onChange={handleChange}
-                        />
-                        </label>
-                    </div>
-                    <div className="form_input">
-                        <label>Apellido
-                        <input 
-                            type="text" 
-                            name="lastName" 
-                            className={isLoginMode ? 'login-mode' : ''}
-                            placeholder={errors.lastName || "Ingrese su apellido..."} 
-                            value={formData.lastName} 
-                            onChange={handleChange}
-                        />
-                        </label>
-                    </div>
+
                     <div className="form_input">
                         <label>Nombre de Usuario
-                        <input 
-                            type="text" 
-                            name="username" 
-                            className={isLoginMode ? 'login-mode' : ''}
-                            placeholder={errors.username || "Pensa en un nombre creativo..."} 
-                            value={formData.username} 
-                            onChange={handleChange}
-                        />
+                            <input 
+                                type="text" 
+                                name="username" 
+                                className={isLoginMode ? 'login-mode' : ''}
+                                placeholder={errors.username || "Pensa en un nombre creativo..."} 
+                                value={formData.username} 
+                                onChange={handleChange}
+                            />
                         </label>
                     </div>
+
+                    <div className="form_input">
+                        <label>Contraseña
+                            <input 
+                                type="password" 
+                                name="password" 
+                                className={isLoginMode ? 'login-mode' : ''}
+                                placeholder={errors.password || "Escribe una contraseña segura..."} 
+                                value={formData.password} 
+                                onChange={handleChange}
+                            />
+                        </label>
+                    </div>
+
                     {!isLoginMode && (
                         <>
                             <div className="form_input">
+                                <label>Nombre
+                                    <input 
+                                        type="text" 
+                                        name="firstName" 
+                                        placeholder={errors.firstName || "Ingrese su nombre..."} 
+                                        value={formData.firstName} 
+                                        onChange={handleChange}
+                                    />
+                                </label>
+                            </div>
+                            <div className="form_input">
+                                <label>Apellido
+                                    <input 
+                                        type="text" 
+                                        name="lastName" 
+                                        placeholder={errors.lastName || "Ingrese su apellido..."} 
+                                        value={formData.lastName} 
+                                        onChange={handleChange}
+                                    />
+                                </label>
+                            </div>
+                            <div className="form_input">
                                 <label>¿De qué escuela venís?
-                                <input 
-                                    type="text" 
-                                    name="school" 
-                                    className={isLoginMode ? 'login-mode' : ''}
-                                    placeholder={errors.school || "Escribe el nombre de tu escuela..."} 
-                                    value={formData.school} 
-                                    onChange={handleChange}
-                                />
+                                    <input 
+                                        type="text" 
+                                        name="school" 
+                                        placeholder={errors.school || "Escribe el nombre de tu escuela..."} 
+                                        value={formData.school} 
+                                        onChange={handleChange}
+                                    />
                                 </label>
                             </div>
                             <div className="form_input">
                                 <label>¿Quiénes van a ser parte del equipo? (5 por equipo)
-                                <input 
-                                    list="miembros" 
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    placeholder={placeholder}
-                                />
-                                <datalist id="miembros" name="miembros"></datalist>
+                                    <input 
+                                        list="miembros" 
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        placeholder={placeholder}
+                                    />
+                                    <datalist id="miembros" name="miembros"></datalist>
                                 </label>
                                 <button onClick={handleAddMember}>
                                     <span id="member" className="button_top">AGREGAR MIEMBRO</span>
@@ -159,14 +170,13 @@ const PlayerForm = ({ onNextScreen }) => {
                             </div>
                             <div className="form_input">
                                 <label>¿Cómo se va a llamar tu equipo?
-                                <input 
-                                    type="text" 
-                                    name="teamName" 
-                                    className={isLoginMode ? 'login-mode' : ''}
-                                    placeholder={errors.teamName || "Ej: Los Guardianes Rojos"} 
-                                    value={formData.teamName} 
-                                    onChange={handleChange}
-                                />
+                                    <input 
+                                        type="text" 
+                                        name="teamName" 
+                                        placeholder={errors.teamName || "Ej: Los Guardianes Rojos"} 
+                                        value={formData.teamName} 
+                                        onChange={handleChange}
+                                    />
                                 </label>
                             </div>
                         </>
@@ -199,6 +209,3 @@ PlayerForm.propTypes = {
 };
 
 export default PlayerForm;
-
-
-

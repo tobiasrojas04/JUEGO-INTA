@@ -27,7 +27,59 @@ const questionsData = {
       correctAnswer: 2
     },
   ],
+  vacas: [
+    {
+      question: '¿Cómo ayudan las vacas al suelo?',
+      answers: ['Añaden nutrientes', 'Lo compactan mucho', 'Lo secan', 'Lo dañan con sus patas'],
+      correctAnswer: 0
+    },
+    {
+      question: '¿Qué necesitan las vacas para que el suelo sea bueno?',
+      answers: ['Buenas pasturas', 'Muchas piedras', 'Poco pasto', 'Mucho barro'],
+      correctAnswer: 0
+    },
+    {
+      question: '¿Qué aportan las vacas al suelo?',
+      answers: ['Nutrientes y fertilizantes', 'Sombra', 'Nieve', 'Arena'],
+      correctAnswer: 0
+    }
+  ],
+  microorganismos: [
+    {
+      question: '¿Qué hacen los microorganismos en el suelo?',
+      answers: ['Lo limpian', 'Lo fertilizan', 'Se lo comen todo', 'Lo secan'],
+      correctAnswer: 1
+    },
+    {
+      question: '¿Qué necesitan los microorganismos para vivir en el suelo?',
+      answers: ['Agua y nutrientes', 'Mucho sol', 'Viento', 'Frío extremo'],
+      correctAnswer: 0
+    },
+    {
+      question: '¿Por qué son importantes los microorganismos en el suelo?',
+      answers: ['Ayudan a las plantas a crecer', 'Lo hacen más ácido', 'Lo llenan de basura', 'Lo hacen más rocoso'],
+      correctAnswer: 0
+    }
+  ],
+  origen: [
+    {
+      question: '¿Cómo se formó el suelo?',
+      answers: ['Por erosión de rocas', 'Cayó del cielo', 'Nació de las plantas', 'Llegó con el viento'],
+      correctAnswer: 0
+    },
+    {
+      question: '¿Qué es el suelo?',
+      answers: ['Es una mezcla de minerales y materia orgánica', 'Es solo polvo', 'Es tierra mágica', 'Es agua dura'],
+      correctAnswer: 0
+    },
+    {
+      question: '¿Por qué es importante cuidar el suelo?',
+      answers: ['Porque nos da comida y vida', 'Porque es bonito', 'Porque lo necesitamos para correr', 'Porque nos protege del sol'],
+      correctAnswer: 0
+    }
+  ],
 };
+
 
 const GameInterface = () => {
   const { category } = useParams();
