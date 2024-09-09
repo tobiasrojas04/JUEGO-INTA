@@ -139,10 +139,100 @@ button:active .button_top {
     transform: translateY(0);
 }
 
-/* Media Queries */
+/*RESPONSIVIDAD PARA EL LOG IN*/
 @media (min-width: 768px) {
     form {
         padding: 20px 40px;
     }
 }
 
+/* Ajustes adicionales para mejorar la responsividad en dispositivos móviles */
+@media (max-width: 768px) {
+    form {
+        width: 90%; /* Asegurar que el formulario no sea demasiado ancho */
+        padding: 14px 9px; /* Reducir el padding para pantallas pequeñas */
+    }
+
+    .form_subtitle {
+        font-size: 1.5rem; /* Reducir el tamaño del título en móviles */
+    }
+
+    .button_group {
+        flex-direction: column; /* Alinear los botones en columna en lugar de fila */
+        gap: 10px; /* Reducir el espacio entre los botones */
+    }
+
+    button {
+        width: 100%; /* Hacer los botones del 100% del ancho del contenedor */
+        font-size: 0.9rem; /* Reducir el tamaño del texto del botón */
+        padding: 8px 13px; /* Ajustar el padding para que los botones no ocupen demasiado espacio vertical */
+    }
+
+    input, textarea, select {
+        font-size: 1rem; /* Ajustar el tamaño de fuente en los campos de entrada */
+    }
+}
+
+@media (max-width: 480px) {
+    .form_subtitle {
+        font-size: 1.2rem; /* Reducir aún más el tamaño del título en pantallas muy pequeñas */
+    }
+
+    .button_group {
+        gap:5px; /* Reducir el espacio entre botones */
+    }
+
+    form {
+        padding: 9px; /* Reducir el padding en pantallas muy pequeñas */
+    }
+
+    button {
+        padding: 8px 12px; /* Ajustar el padding en botones en pantallas muy pequeñas */
+    }
+
+    input, textarea, select {
+        font-size: 0.9rem; /* Reducir el tamaño de fuente en los campos de entrada */
+    }
+}
+
+/*RESPONSIVIDAD PARA EL REGISTER*/
+.player-form form {
+    padding: 10px 15px; /* Reducir el padding para que ocupe menos espacio */
+}
+
+.player-form .form_input {
+    margin-bottom: 5px; /* Reducir el espacio entre los campos de formulario */
+}
+
+.player-form .button_group {
+    margin-top: 10px; /* Reducir el margen superior de los botones */
+}
+
+/* Ajustes adicionales solo para pantallas pequeñas (celulares) */
+@media (max-width: 768px) {
+    .player-form form {
+        padding: 10px 8px; /* Ajustar el padding para pantallas más pequeñas */
+    }
+
+    .player-form input, .player-form textarea, .player-form select {
+        font-size: 0.9rem; /* Reducir el tamaño de fuente para los campos de entrada */
+    }
+
+    .player-form .button_top {
+        padding: 0.7em 1.3em; /* Ajustar el padding de los botones para que no ocupen tanto espacio */
+    }
+}
+
+@media (max-width: 480px) {
+    .player-form form {
+        padding: 8px; /* Reducir más el padding en pantallas muy pequeñas */
+    }
+
+    .player-form input, .player-form textarea, .player-form select {
+        font-size: 0.8rem; /* Reducir aún más el tamaño de fuente en pantallas pequeñas */
+    }
+
+    .player-form .button_top {
+        padding: 0.6em 1.1em; /* Reducir más el padding de los botones */
+    }
+}

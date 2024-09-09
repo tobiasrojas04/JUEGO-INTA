@@ -63,7 +63,7 @@ const PlayerForm = () => {
     };
 
     return (
-        <div className='form-container'>
+        <div className='form-container player-form'>
             <form onSubmit={handleSubmit}>
                 <h2 className="form_subtitle">Guardianes del suelo</h2>
                 

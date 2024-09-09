@@ -4,78 +4,125 @@ body {
 
 h2 {
     text-align: center;
-    margin-top: 10%; /* Reduce el margen superior */
+    margin-top: 5%;
     font-family: 'Fredoka One', sans-serif;
-    font-size: calc(1.5rem + 1vw); /* Tamaño de fuente relativo al viewport */
+    font-size: calc(1.5rem + 1vw);
 }
 
 .imagenes-empresas {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around; /* Distribuye las imágenes verticalmente */
-    align-items: center; /* Centra las imágenes horizontalmente */
-    width: 80%; /* Ajusta el ancho del contenedor a un porcentaje del viewport */
-    max-width: 1200px; /* Limita el ancho máximo del contenedor */
-    height: auto; /* Ajusta la altura automáticamente */
-    margin: 2rem auto; /* Márgenes verticales y horizontales automáticos */
+    flex-direction: column; /* Siempre en columna */
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px;
+    margin: 2rem auto;
 }
 
 .empresas {
-    width: 80%; /* Ajusta el ancho de las imágenes a un porcentaje del contenedor */
-    max-width: 200px; /* Limita el ancho máximo de cada imagen */
-    height: auto; /* Ajusta la altura automáticamente */
-    margin: 1rem 0; /* Márgenes verticales */
+    width: 80%; /* Cambié a 80% para pantallas grandes */
+    max-width: 200px;
+    height: auto;
+    margin: 1rem;
     border: 5px solid transparent;
     border-radius: 30px;
 }
 
-.inta {
-    box-shadow: 4px 4px 3px #dc504d
-
-    ; /* x, y, blur and color */
+.inta, .muni, .unraf {
     border: transparent;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.inta {
+    box-shadow: 4px 4px 3px #dc504d;
 }
 
 .muni {
-    border: transparent;
-    box-shadow: 4px 4px 3px #ffdd31 ;
+    box-shadow: 4px 4px 3px #ffdd31;
 }
 
 .unraf {
-    border: transparent;
     box-shadow: 4px 4px 8px #1ab8e3;
 }
 
 /* Media Queries */
-@media (max-width: 768px) {
-    h2 {
-        font-size: calc(1.25rem + 1vw); /* Tamaño de fuente más pequeño en pantallas pequeñas */
-        margin-top: 10%; /* Mayor margen superior en pantallas pequeñas */
-    }
-
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Pantallas medianas */
     .imagenes-empresas {
-        width: 90%; /* Aumenta el ancho del contenedor en pantallas pequeñas */
+        width: 70%;
+        flex-direction: row; /* En pantalla mediana las ponemos en fila */
+        flex-wrap: wrap;
     }
 
     .empresas {
-        width: 60%; /* Reduce el ancho de las imágenes en pantallas pequeñas */
-        max-width: 150px; /* Reduce el ancho máximo de las imágenes */
+        width: 45%; /* Ajusta las imágenes para pantallas medianas */
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Pantallas pequeñas */
+    h2 {
+        font-size: calc(1.25rem + 1vw);
+        margin-top: 10%;
+    }
+
+    .imagenes-empresas {
+        width: 95%;
+        flex-direction: column;
+    }
+
+    .empresas {
+        width: 60%;
+        max-width: 150px;
     }
 }
 
 @media (max-width: 480px) {
+    /* Pantallas muy pequeñas */
     h2 {
-        font-size: calc(1rem + 2vw); /* Tamaño de fuente aún más pequeño en pantallas muy pequeñas */
-        margin-top: 15%; /* Mayor margen superior en pantallas muy pequeñas */
+        font-size: calc(1rem + 2vw);
+        margin-top: 15%;
     }
 
     .imagenes-empresas {
-        width: 100%; /* Ancho completo en pantallas muy pequeñas */
+        width: 100%;
     }
 
     .empresas {
-        width: 80%; /* Ajusta el ancho de las imágenes a un porcentaje del contenedor */
-        max-width: 120px; /* Reduce el ancho máximo de las imágenes */
+        width: 80%;
+        max-width: 120px;
     }
 }
 
+@media (max-width: 1366px) {
+    h2 {
+        font-size: calc(1.25rem + 0.8vw); /* Tamaño de fuente ligeramente más pequeño */
+        margin-top: 8%; /* Menor margen superior */
+    }
+
+    .imagenes-empresas {
+        width: 85%; /* Ajusta el ancho para que se vea bien en pantallas más pequeñas */
+    }
+
+    .empresas {
+        width: 70%; /* Reduce el tamaño de las imágenes en monitores más pequeños */
+        max-width: 180px; /* Limita el tamaño máximo de las imágenes */
+    }
+}
+
+@media (max-width: 1024px) {
+    h2 {
+        font-size: calc(1.15rem + 1vw); /* Ajusta el tamaño de la fuente en pantallas más pequeñas */
+        margin-top: 10%; 
+    }
+
+    .imagenes-empresas {
+        width: 90%; /* Aumenta el ancho para pantallas más pequeñas */
+    }
+
+    .empresas {
+        width: 60%; /* Ajusta el tamaño de las imágenes para que se adapten */
+        max-width: 160px;
+    }
+}
