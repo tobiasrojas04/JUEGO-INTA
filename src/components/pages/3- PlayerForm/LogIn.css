@@ -2,20 +2,18 @@
 
 form {
     position: absolute;
-    top: 10%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     background-color: #bd612d;
     justify-content: center;
     text-align: center;
-    padding: 15px 15px;
+    padding: 20px 20px;
     width: 90%;
     max-width: 600px;
     box-shadow: 0 0 25px green;
     border: 2px solid yellow;
     border-radius: 8px;
-    max-height: 90vh;
-    overflow-y: auto;
 }
 
 .form_subtitle {
@@ -70,6 +68,20 @@ label {
     color: yellow;
 }
 
+/* Modo login */
+.login-mode input, .login-mode textarea, .login-mode select {
+    border: 1px solid #62dc09;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.fieldset_form1.login-mode {
+    border: 1px solid #62dc09;
+}
+
+.fieldset_legends.login-mode {
+    color: #62dc09;
+}
+
 button {
     font-family: 'Fredoka One', sans-serif;
     --button_radius: 0.75em;
@@ -80,6 +92,10 @@ button {
     border-radius: var(--button_radius);
     background: var(--button_outline_color);
     margin-top: 2%;
+}
+
+#espacio {
+    margin-left: 8%;
 }
 
 .button_group {
@@ -101,11 +117,6 @@ button {
     transition: transform 0.1s ease;
 }
 
-#member {
-    font-size: 12px;
-    padding: 0.9em 1.4em;
-}
-
 button:hover .button_top {
     transform: translateY(-0.33em);
 }
@@ -114,13 +125,14 @@ button:active .button_top {
     transform: translateY(0);
 }
 
-/*RESPONSIVIDAD*/
+/*RESPONSIVIDAD PARA EL LOG IN*/
 @media (min-width: 768px) {
     form {
         padding: 20px 40px;
     }
 }
 
+/* Ajustes adicionales para mejorar la responsividad en dispositivos móviles */
 @media (max-width: 768px) {
     form {
         width: 90%;

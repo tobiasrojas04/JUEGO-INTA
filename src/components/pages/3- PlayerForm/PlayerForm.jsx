@@ -144,7 +144,7 @@ const PlayerForm = () => {
                             <datalist id="miembros" name="miembros"></datalist>
                         </label>
                         <button onClick={handleAddMember}>
-                            <span id="member" className="button_top">AGREGAR MIEMBRO</span>
+                            <span id="member" className="button_top ">AGREGAR MIEMBRO</span>
                         </button>
                         <ul>
                             {teamMembers.map((member, index) => (
